@@ -1,3 +1,8 @@
+/*
+  Last modified on Saturday Mar 2 22:31 2019
+
+  @author: zhao-zh10
+*/
 #include <math.h>
 #include <uWS/uWS.h>
 #include <iostream>
@@ -41,7 +46,7 @@ int main() {
   vector<VectorXd> ground_truth;
 
   h.onMessage([&fusionEKF,&tools,&estimations,&ground_truth]
-              (uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
+              (uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length,
                uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
@@ -53,14 +58,14 @@ int main() {
         auto j = json::parse(s);
 
         string event = j[0].get<string>();
-        
+
         if (event == "telemetry") {
           // j[1] is the data JSON object
           string sensor_measurement = j[1]["sensor_measurement"];
-          
+
           MeasurementPackage meas_package;
           std::istringstream iss(sensor_measurement);
-          
+
           long long timestamp;
 
           // reads first element from the current line
@@ -102,15 +107,15 @@ int main() {
 
           VectorXd gt_values(4);
           gt_values(0) = x_gt;
-          gt_values(1) = y_gt; 
+          gt_values(1) = y_gt;
           gt_values(2) = vx_gt;
           gt_values(3) = vy_gt;
           ground_truth.push_back(gt_values);
-          
-          // Call ProcessMeasurement(meas_package) for Kalman filter
-          fusionEKF.ProcessMeasurement(meas_package);       
 
-          // Push the current estimated x,y positon from the Kalman filter's 
+          // Call ProcessMeasurement(meas_package) for Kalman filter
+          fusionEKF.ProcessMeasurement(meas_package);
+
+          // Push the current estimated x,y positon from the Kalman filter's
           //   state vector
 
           VectorXd estimate(4);
@@ -124,9 +129,8 @@ int main() {
           estimate(1) = p_y;
           estimate(2) = v1;
           estimate(3) = v2;
-        
-          estimations.push_back(estimate);
 
+          estimations.push_back(estimate);
           VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
 
           json msgJson;
@@ -154,7 +158,7 @@ int main() {
     std::cout << "Connected!!!" << std::endl;
   });
 
-  h.onDisconnection([&h](uWS::WebSocket<uWS::SERVER> ws, int code, 
+  h.onDisconnection([&h](uWS::WebSocket<uWS::SERVER> ws, int code,
                          char *message, size_t length) {
     ws.close();
     std::cout << "Disconnected" << std::endl;
@@ -167,6 +171,6 @@ int main() {
     std::cerr << "Failed to listen to port" << std::endl;
     return -1;
   }
-  
+
   h.run();
 }
