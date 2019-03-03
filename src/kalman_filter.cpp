@@ -56,13 +56,13 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   /**
    * TODO: update the state by using Extended Kalman Filter equations
    */
-   double px = x_(0);
-   double py = x_(1);
-   double vx = x_(2);
-   double vy = x_(3);
-   double rho_predicted = sqrt(px * px + py * py);
-   double phi_predicted = atan2(py, px);
-   double rho_rate_predicted = (px * vx + py * vy) / rho_predicted;
+   const double px = x_(0);
+   const double py = x_(1);
+   const double vx = x_(2);
+   const double vy = x_(3);
+   const double rho_predicted = sqrt(px * px + py * py);
+   const double phi_predicted = atan2(py, px);
+   const double rho_rate_predicted = (px * vx + py * vy) / rho_predicted;
    VectorXd hx(3);
    hx << rho_predicted, phi_predicted, rho_rate_predicted;
    VectorXd y = z - hx;
