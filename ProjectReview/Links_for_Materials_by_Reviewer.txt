@@ -1,0 +1,9 @@
+1.  Cmake FAQS  (  https://cmake.org/Wiki/CMake_FAQ  )
+2.  Using make and writing Makefiles  (  https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_makefiles.html  )
+3.  Youtube set of tutorials on using make and writing Makefile.  (  https://www.youtube.com/watch?v=aw9wHbFTnAQ  )
+4.  MakeFiles  (  https://www.cs.umd.edu/class/fall2002/cmsc214/Tutorial/makefile.html  )
+5.  10 Tips for C and C++ Performance Improvement Code Optimization     https://www.thegeekstuff.com/2015/01/c-cpp-code-optimization/?utm_source=feedburner&utm_medium=email&utm_campaign=Feed%253A+TheGeekStuff+(The+Geek+Stuff     
+6.  C++ Optimization Strategies and Techniques   (   http://www.tantalon.com/pete/cppopt/main.htm   )  
+
+
+
